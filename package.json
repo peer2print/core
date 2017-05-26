@@ -1,0 +1,26 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "peer2print core js<->ethereum wrapper using web3",
+  "main": "index.js",
+  "scripts": {
+	"start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start-testrpc": "testrpc >>testrpc.log 2>>testrpc.log & echo $! > testrpc.pid",
+	"stop-testrpc": "kill `cat testrpc.pid`;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peer2print/core.git"
+  },
+  "author": "peer2print",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peer2print/core/issues"
+  },
+  "homepage": "https://github.com/peer2print/core#readme",
+  "dependencies": {
+    "ethereumjs-testrpc": "^3.0.5",
+    "web3": "^0.19.0"
+  }
+}
