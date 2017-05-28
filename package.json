@@ -1,10 +1,9 @@
 {
   "name": "core",
   "version": "1.0.0",
-  "description": "peer2print core js<->ethereum wrapper using web3",
-  "main": "index.js",
+  "description": "peer2print core js<->ethereum wrapper using web3 and truffle-contract",
   "scripts": {
-    "test": "node ./index.js"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,7 +16,7 @@
   },
   "homepage": "https://github.com/peer2print/core#readme",
   "dependencies": {
-    "ethereumjs-testrpc": "^3.0.5",
+    "mocha": "^3.4.2",
     "truffle-contract": "^2.0.0",
     "web3": "^0.19.0"
   }
