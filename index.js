@@ -1,25 +1,32 @@
-const contracts_location = "../contracts"
+const from_address = "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1"
 
-var Web3 = require('web3')
-var Produce = require(contracts_location+"/build/contracts/ProductionRegistry.json")
-var contract = require("truffle-contract")
-var web3Provider = new Web3.providers.HttpProvider("http://localhost:8545")
+var loadContract = require("./functions/loadContract.js")
 
-var MyContract = contract(Produce)
-MyContract.setProvider(web3Provider)
+var ProductionRegistry = loadContract("ProductionRegistry")
+var Production = loadContract("Production")
 
-MyContract.deployed().then(function(instance) {
-	console.log(instance)
-}).catch(function (e) {
-	console.log(e)
-})
+var prodReg
 
-MyContract.deployed().then(function(instance) {
-	return instance.getProductionsCount({from: "0x1337"}) // <-- matches the doStuff() function within MyContract.sol.
+ProductionRegistry.deployed().then(function(prodRegInstance) {
+	prodReg = prodRegInstance
+	return prodReg.getProductionsCount.call()
 }).then(function(result) {
-	// We just made a transaction, and it's been mined!
-	// We're given transaction hash, logs (events) and receipt for further processing.
-	console.log(result.tx, result.logs, result.receipt);
+	console.log("Number of productions in registry: "+Number(result))
+	var prod
+	Production.deployed().then(function(prodIntance) {
+		prod = prodIntance
+	}).catch(function(e) {
+		console.log("Failed to abstract the Production contract\n"+e)
+	}).then(function() {
+		return prodReg.addProduction(prod.address, {from: from_address})
+	}).catch(function (e) {
+		console.log("Failed to add the production to the registry\n"+e)
+	}).then(function(result) {
+		console.log("Production:\n"+result)
+		return prodReg.getProductionsCount.call()
+	}).then(function(result) {
+		console.log("Number of productions in registry after adding: "+Number(result))
+	})
 }).catch(function (e) {
-	console.log(e)
+	console.log("Failed to abstract the ProductionRegistry contract\n"+e)
 })
