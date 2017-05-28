@@ -12,4 +12,5 @@ before_install:
     - npm install
     - npm run start-testrpc
     - npm run migrate
+    - cd ../core
 script:  npm run test
