@@ -1,4 +1,11 @@
 language: node_js
 node_js:
     - "node"
+before_install:
+    - cd ..
+    - git clone https://github.com/peer2print/contracts.git
+    - cd contracts
+    - npm install
+    - npm run start-testrpc
+    - npm run migrate
 script:  npm run test
