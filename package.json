@@ -18,6 +18,7 @@
   "dependencies": {
     "mocha": "^3.4.2",
     "truffle-contract": "^2.0.0",
-    "web3": "^0.19.0"
+    "web3": "^0.19.0",
+	"contracts": "../contracts"
   }
 }
