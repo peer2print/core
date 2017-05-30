@@ -7,7 +7,7 @@ const contracts = require("contracts");
 
 module.exports = function (name)
 {
-	var ct = contract(contracts[name+".json"])
+	var ct = contract(contracts[name])
 	ct.setProvider(web3Provider)
 	return ct
 }
